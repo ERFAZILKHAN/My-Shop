@@ -20,7 +20,7 @@ import com.google.firebase.firestore.firestore
 
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding:FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
         val preference = requireContext().getSharedPreferences("info", AppCompatActivity.MODE_PRIVATE)
         if (preference.getBoolean("isCart",false))
             findNavController().navigate(R.id.action_homeFragment_to_cartFragment)

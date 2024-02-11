@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.my_shop1.activity.ProductDetailsActivity
@@ -35,12 +36,11 @@ class CategoryProductAdapter(val context: Context, val list:ArrayList<AddProduct
         holder.binding.textView6.text = list[position].productSp
 
         holder.itemView.setOnClickListener {
-            val intent  = Intent(context,ProductDetailsActivity::class.java)
-            intent.putExtra("id",list[position].productId)
+            Toast.makeText(context, list.get(position).productName, Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, ProductDetailsActivity::class.java)
+            intent.putExtra("id", list[position].productId)
             context.startActivity(intent)
 
         }
-
-
     }
 }

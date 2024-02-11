@@ -13,6 +13,15 @@
         android:theme="@style/Theme.My_Shop1"
         tools:targetApi="31">
         <activity
+            android:name=".activity.OTPActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AddressActivity"
             android:exported="false" />
         <activity

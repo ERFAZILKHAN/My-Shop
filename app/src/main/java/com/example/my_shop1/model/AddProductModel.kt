@@ -4,15 +4,12 @@ import androidx.room.Entity
 
 data class AddProductModel(
 
-
-    val productName:String? = "",
-    val productDescription:String? = "",
-    val productCoverImg:String? = "",
     val productCategory:String? = "",
+    val productCoverImg:String? = "",
+    val productDescription:String? = "",
     val productId:String? = "",
+    val productImage:ArrayList<String> = ArrayList(),
     val productMrp:String? = "",
-    val productSp:String? = "",
-    val productImage:ArrayList<String> = ArrayList()
-
-
+    val productName:String? = "",
+    val productSp:String? = ""
 )
