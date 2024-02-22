@@ -19,6 +19,7 @@ import com.example.my_shop1.roomdp.ProductModel
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
+    private lateinit var list:ArrayList<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +33,17 @@ class CartFragment : Fragment() {
 
         // Initialize database and observe product list changes
         val dao = AppDatabase.getInstance(requireContext()).productDao()
+
+        list = ArrayList()
+
         dao.getAllProduct().observe(viewLifecycleOwner) { productList ->
             Log.d("CartFragment", "Product List Size: ${productList.size}")
             binding.cartRecycler.adapter = CartAdapter(requireContext(), productList)
+
+            list.clear()
+            for (data in productList ){
+                list.add(data.productId)
+            }
 
             totalCost(productList)
         }
@@ -61,9 +70,9 @@ class CartFragment : Fragment() {
         binding.textView13.text = "Total Cost : ${total}"
 
         binding.checkout.setOnClickListener {
-
             val intent = Intent(context, AddressActivity::class.java)
             intent.putExtra("totalCost",total)
+            intent.putExtra("productIds",list)
             startActivity(intent)
 
         }

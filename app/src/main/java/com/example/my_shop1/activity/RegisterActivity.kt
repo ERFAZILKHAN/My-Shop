@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.my_shop1.R
 import com.example.my_shop1.databinding.ActivityRegisterBinding
+import com.example.my_shop1.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -42,9 +43,15 @@ class RegisterActivity : AppCompatActivity() {
             .create()
         builder.show()
 
-        val data = hashMapOf<String,Any>()
-        data["name"] = binding.userName.text.toString()
-        data["number"] = binding.userNumber.text.toString()
+        val preferences = this.getSharedPreferences("user", MODE_PRIVATE)
+        val editor = preferences.edit()
+
+        editor.putString("number", binding.userNumber.text.toString())
+        editor.putString("name", binding.userName.text.toString())
+        editor.apply()
+
+        val data = UserModel(userName = binding.userName.text.toString(),
+            userPhoneNumber = binding.userNumber.text.toString() )
 
 
         Firebase.firestore.collection("users").document(binding.userNumber.text.toString())

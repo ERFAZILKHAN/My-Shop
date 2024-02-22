@@ -81,4 +81,7 @@ dependencies {
     //corountine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0-RC2")
 
+    //Rozarpay
+    implementation 'com.razorpay:checkout:1.6.33'
+
 }

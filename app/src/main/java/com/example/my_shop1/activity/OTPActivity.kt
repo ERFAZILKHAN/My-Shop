@@ -42,6 +42,11 @@ class OTPActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
+                    val preferences = this.getSharedPreferences("user", MODE_PRIVATE)
+                    val editor = preferences.edit()
+
+                    editor.putString("number",intent.getStringExtra("number")!!)
+                    editor.apply()
 
                     startActivity(Intent(this,MainActivity::class.java))
                     finish()
@@ -50,8 +55,6 @@ class OTPActivity : AppCompatActivity() {
                 } else {
 
                     Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show()
-
-
 
                 }
             }
