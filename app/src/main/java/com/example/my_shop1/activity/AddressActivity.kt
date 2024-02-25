@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.my_shop1.R
 import com.example.my_shop1.databinding.ActivityAddressBinding
+import com.google.android.play.integrity.internal.t
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -56,10 +57,15 @@ class AddressActivity : AppCompatActivity() {
         Firebase.firestore.collection("users")
             .document(preferences.getString("number" , "")!!)
             .update(map).addOnSuccessListener {
-                val intent = Intent(this, CheckOutActivity::class.java)
-                intent.putExtra("productIds",intent.getStringArrayExtra("productIds"))
-                startActivity(intent)
 
+                val b = Bundle()
+                b.putStringArrayList("productIds",getIntent().getStringArrayListExtra("productIds"))
+                val totalCost = null
+                b.putString("totalCost",totalCost)
+
+                val intent = Intent(this, CheckOutActivity::class.java)
+                intent.putExtras(b)
+                startActivity(intent)
 
             }.addOnFailureListener {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
