@@ -71,7 +71,6 @@ class CartFragment : Fragment() {
 
         binding.checkout.setOnClickListener {
             val intent = Intent(context, AddressActivity::class.java)
-
             val b = Bundle()
             b.putStringArrayList("productIds",list)
             b.putString("totalCost",total.toString())

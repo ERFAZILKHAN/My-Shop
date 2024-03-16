@@ -15,12 +15,16 @@ class AddressActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddressBinding
     private lateinit var  preferences:SharedPreferences
+    private lateinit var totalCost:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferences= this.getSharedPreferences("user", MODE_PRIVATE)
 
+
+        totalCost= intent.getStringExtra("totalCost")!!
         lordUserInfo()
 
         binding.proceed.setOnClickListener {
@@ -34,7 +38,6 @@ class AddressActivity : AppCompatActivity() {
             )
         }
     }
-
 
 
     private fun validateData(number: String, name: String, pinCode: String, city: String, state: String, village: String) {
@@ -57,10 +60,8 @@ class AddressActivity : AppCompatActivity() {
         Firebase.firestore.collection("users")
             .document(preferences.getString("number" , "")!!)
             .update(map).addOnSuccessListener {
-
                 val b = Bundle()
-                b.putStringArrayList("productIds",getIntent().getStringArrayListExtra("productIds"))
-                val totalCost = null
+                b.putStringArrayList("productIds",intent.getStringArrayListExtra("productIds"))
                 b.putString("totalCost",totalCost)
 
                 val intent = Intent(this, CheckOutActivity::class.java)
